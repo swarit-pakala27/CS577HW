@@ -34,8 +34,7 @@ public class FurthestInFuturePaging {
                 if (cache.size() < k) {
                     cache.add(page);
                 } else {
-                    // Need to evict: find page used furthest in the 
-future
+                    // Need to evict: find page used furthest in the future
                     int toRemove = -1;
                     int maxFuture = -1;
                     for (int p : cache) {
