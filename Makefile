@@ -1,12 +1,10 @@
-# Makefile for IntervalScheduling.java
-
 JAVAC = javac
 JAVA = java
 MAIN = IntervalScheduling
 
-all: compile run
+all: build run
 
-compile:
+build:
 	$(JAVAC) $(MAIN).java
 
 run:
