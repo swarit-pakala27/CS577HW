@@ -5,6 +5,9 @@ CLASS = WeightedIntervalScheduling
 
 all: compile run
 
+build:
+	$(JAVAC) $(SRC)
+
 compile:
 	$(JAVAC) $(SRC)
 
