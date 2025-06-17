@@ -2,8 +2,9 @@ import java.util.*;
 
 public class WeightedIntervalScheduling {
     static class Job implements Comparable<Job> {
-        int start, end, weight;
-        Job(int s, int e, int w) {
+        int start, end;
+        long weight;
+        Job(int s, int e, long w) {
             start = s;
             end = e;
             weight = w;
@@ -15,25 +16,34 @@ public class WeightedIntervalScheduling {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int instances = sc.nextInt();
-        for (int t = 0; t < instances; t++) {
-            int n = sc.nextInt();
-            Job[] jobs = new Job[n];
-            for (int i = 0; i < n; i++) {
-                int start = sc.nextInt();
-                int end = sc.nextInt();
-                int weight = sc.nextInt();
-                jobs[i] = new Job(start, end, weight);
+        try {
+            int instances = sc.nextInt();
+            for (int t = 0; t < instances; t++) {
+                int n = sc.nextInt();
+                if (n == 0) {
+                    System.out.println(0);
+                    continue;
+                }
+                Job[] jobs = new Job[n];
+                for (int i = 0; i < n; i++) {
+                    int start = sc.nextInt();
+                    int end = sc.nextInt();
+                    long weight = sc.nextLong();
+                    jobs[i] = new Job(start, end, weight);
+                }
+                System.out.println(solve(jobs));
             }
-            System.out.println(solve(jobs));
+        } catch (Exception e) {
+            System.out.println("Invalid input format.");
+        } finally {
+            sc.close();
         }
-        sc.close();
     }
 
-    static int solve(Job[] jobs) {
+    static long solve(Job[] jobs) {
         Arrays.sort(jobs);
         int n = jobs.length;
-        int[] dp = new int[n + 1];
+        long[] dp = new long[n + 1];
         int[] p = new int[n];
 
         for (int i = 0; i < n; i++) {
@@ -51,7 +61,7 @@ public class WeightedIntervalScheduling {
         }
 
         for (int i = 1; i <= n; i++) {
-            int include = jobs[i - 1].weight;
+            long include = jobs[i - 1].weight;
             if (p[i - 1] != -1) include += dp[p[i - 1] + 1];
             dp[i] = Math.max(dp[i - 1], include);
         }
