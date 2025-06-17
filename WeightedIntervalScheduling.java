@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 
 public class WeightedIntervalScheduling {
     static class Job implements Comparable<Job> {
@@ -14,7 +13,7 @@ public class WeightedIntervalScheduling {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int instances = sc.nextInt();
         for (int t = 0; t < instances; t++) {
@@ -28,6 +27,7 @@ public class WeightedIntervalScheduling {
             }
             System.out.println(solve(jobs));
         }
+        sc.close();
     }
 
     static int solve(Job[] jobs) {
