@@ -25,8 +25,7 @@ public class BipartiteMatching {
         }
     }
 
-    // add an edge u→v with capacity c, and the reverse edge v→u with 
-capacity 0
+    // add an edge u→v with capacity c, and the reverse edge v→u wi capacity 0
     void addEdge(int u, int v, int c) {
         graph[u].add(new Edge(v, c, graph[v].size()));
         graph[v].add(new Edge(u, 0, graph[u].size() - 1));
