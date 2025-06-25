@@ -6,20 +6,18 @@ TARGET  = BipartiteMatching
 SRC     = $(TARGET).java
 CLASS   = $(TARGET).class
 
-.PHONY: build run clean
+.PHONY: all build run clean
+
+all: build
 
 build: $(CLASS)
 
 $(CLASS): $(SRC)
 	$(JAVAC) $(SRC)
 
+# Usage: make run IN=your_input.txt
 run: build
-	@if [ -z "$(IN)" ]; then \
-	  echo "Usage: make run IN=<input-file>"; \
-	  exit 1; \
-	else \
-	  $(JAVA) $(TARGET) < $(IN); \
-	fi
+	$(JAVA) $(TARGET) < $(IN)
 
 clean:
 	rm -f $(CLASS)
