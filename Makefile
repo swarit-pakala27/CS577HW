@@ -1,21 +1,26 @@
 # Makefile for BipartiteMatching.java
 
-JAVAC     = javac
-JAVA      = java
-SRC       = BipartiteMatching.java
-BUILD_DIR = build
+JAVAC   = javac
+JAVA    = java
+TARGET  = BipartiteMatching
+SRC     = $(TARGET).java
+CLASS   = $(TARGET).class
 
-.PHONY: all clean
+.PHONY: build run clean
 
-all: $(BUILD_DIR) $(BUILD_DIR)/BipartiteMatching.class
+build: $(CLASS)
 
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+$(CLASS): $(SRC)
+	$(JAVAC) $(SRC)
 
-$(BUILD_DIR)/BipartiteMatching.class: BipartiteMatching.java | 
-$(BUILD_DIR)
-	$(JAVAC) -d $(BUILD_DIR) BipartiteMatching.java
+run: build
+	@if [ -z "$(IN)" ]; then \
+	  echo "Usage: make run IN=<input-file>"; \
+	  exit 1; \
+	else \
+	  $(JAVA) $(TARGET) < $(IN); \
+	fi
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -f $(CLASS)
 
